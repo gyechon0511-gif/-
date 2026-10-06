@@ -33,11 +33,14 @@
       --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
       --font-serif: "Noto Serif KR", Georgia, serif;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
-      --base-font-size: 16px;
     }
 
-    body.pt-large { --base-font-size: 18px; }
-    body.pt-xlarge { --base-font-size: 20px; }
+    html {
+      font-size: 18.5px;
+    }
+    html.pt-normal { font-size: 16px; }
+    html.pt-large { font-size: 18.5px; }
+    html.pt-xlarge { font-size: 21.5px; }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html, body {
@@ -46,7 +49,6 @@
       background: var(--bg);
       font-family: var(--font-sans);
       color: var(--text-main);
-      font-size: var(--base-font-size);
       word-break: keep-all;
     }
     
@@ -85,43 +87,6 @@
     .nav-btn:hover { background: #334155; color: #fff; border-color: #64748b; }
     .nav-btn.primary { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border-color: rgba(16, 185, 129, 0.5); }
     .nav-btn.primary:hover { background: var(--emerald); color: #022c22; }
-    .nav-btn.github-btn {
-      background: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%);
-      color: #fff;
-      border: 1px solid #38bdf8;
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
-      font-weight: 800;
-      padding: 6px 14px;
-      gap: 6px;
-    }
-    .nav-btn.github-btn:hover {
-      background: linear-gradient(135deg, #0369a1 0%, #4338ca 100%);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.7);
-      transform: translateY(-1px);
-    }
-    .floating-github-btn {
-      position: fixed;
-      bottom: 70px;
-      right: 20px;
-      z-index: 40;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      background: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 800;
-      border: 2px solid #38bdf8;
-      border-radius: 999px;
-      box-shadow: 0 10px 25px rgba(2, 6, 23, 0.8), 0 0 15px rgba(56, 189, 248, 0.5);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .floating-github-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 30px rgba(2, 6, 23, 0.9), 0 0 22px rgba(56, 189, 248, 0.7);
-    }
 
     /* 슬라이드 캔버스 */
     main#deck {
@@ -314,9 +279,8 @@
       <button class="nav-btn" onclick="openGrid()">📑 전체 슬라이드</button>
       <button class="nav-btn" onclick="openNotes()">🎙️ 발표해설</button>
       <button class="nav-btn" onclick="toggleHandout()">🖨️ 인쇄/유인물</button>
-      <button class="nav-btn github-btn" onclick="openGitHubModal()" title="깃허브 배포 가이드 & index.html 파일 받기">
-        <svg style="width:15px;height:15px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        <span>깃허브 배포</span>
+      <button class="nav-btn" onclick="openGitHubModal()" title="깃허브 배포 가이드 & index.html 파일 다운로드" aria-label="깃허브" style="padding: 6px 10px;">
+        <svg style="width:16px;height:16px;fill:currentColor;display:block;" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       </button>
       <button class="nav-btn" onclick="toggleFullscreen()">⛶ 전체화면</button>
     </div>
@@ -824,78 +788,180 @@
       </div>
 
       <!-- 상단: 성장 선순환 로드맵 바 -->
-      <div class="card" style="margin-bottom: 1rem; border-color: rgba(16, 185, 129, 0.5); background: linear-gradient(90deg, rgba(6, 78, 59, 0.4) 0%, rgba(15, 23, 42, 0.95) 100%);">
-        <div style="font-size: 0.85rem; font-weight: 800; color: var(--emerald); text-transform: uppercase; margin-bottom: 8px;">
-          ⚡ 학생 전인적 성장 선순환 루프 (Continuous Growth Mechanism)
+      <div class="card" style="margin-bottom: 0.85rem; padding: 0.75rem 1.25rem; border-color: rgba(16, 185, 129, 0.5); background: linear-gradient(90deg, rgba(6, 78, 59, 0.4) 0%, rgba(15, 23, 42, 0.95) 100%); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <div style="font-size: 0.82rem; font-weight: 800; color: var(--emerald); text-transform: uppercase;">
+          ⚡ 4대 특화 영역 상호작용 선순환 루프
         </div>
-        <div class="grid-4" style="text-align: center; font-size: 0.9rem;">
-          <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--emerald); border-radius: 10px; padding: 10px;">
-            <strong style="color: var(--emerald);">01. 배움 (Learning)</strong>
-            <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">화상영어 + 1:1 맞춤 코칭</div>
-          </div>
-          <div style="background: rgba(20, 184, 166, 0.15); border: 1px solid var(--teal); border-radius: 10px; padding: 10px;">
-            <strong style="color: var(--teal);">02. 도전 (Challenge)</strong>
-            <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">무인멀티콥터 1종 전원합격</div>
-          </div>
-          <div style="background: rgba(6, 182, 212, 0.15); border: 1px solid var(--cyan); border-radius: 10px; padding: 10px;">
-            <strong style="color: var(--cyan);">03. 향유 (Appreciation)</strong>
-            <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">별빛오케스트라 & LP 청음</div>
-          </div>
-          <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid var(--amber); border-radius: 10px; padding: 10px;">
-            <strong style="color: var(--amber);">04. 소속 (Belonging)</strong>
-            <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">스마트목장 & 학교야영</div>
-          </div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 700;">
+          <span style="color: #6ee7b7;">① 배움(학습)</span>
+          <span style="color: #64748b;">➔</span>
+          <span style="color: #5eead4;">② 도전(진로)</span>
+          <span style="color: #64748b;">➔</span>
+          <span style="color: #67e8f9;">③ 향유(문화)</span>
+          <span style="color: #64748b;">➔</span>
+          <span style="color: #fde047;">④ 소속(지역)</span>
         </div>
       </div>
 
-      <!-- 하단: 4대 영역별 질적 도약 카드 -->
-      <div class="grid-2">
-        <div class="card" style="border-left: 5px solid var(--emerald);">
-          <div class="badge badge-em">01. 학습성장</div>
-          <h4 class="card-title">맞춤형 학습지원 ➔ 자기주도적 배움</h4>
-          <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 6px;">
-            • <strong>발전 경로:</strong> 진단/개별화 ➔ 즉각 피드백 ➔ 역량 내면화 ➔ 기초학력 신뢰 형성<br />
-            • <strong>질적 전환:</strong> [이전] 학습 실패 두려움 & 피동적 수동 ➔ <strong>[도약] 자율적 목표 설정 & 성찰 습관</strong>
-          </p>
-          <div style="padding: 6px 10px; background: rgba(16, 185, 129, 0.1); border-radius: 6px; font-size: 0.82rem; color: #a7f3d0; font-style: italic;">
-            "원어민 선생님과 매주 말하면서 영어에 대한 두려움이 완전히 사라졌어요."
-          </div>
-        </div>
+      <!-- 4대 영역 종합 분석 표 -->
+      <div class="card" style="padding: 0; overflow: hidden; border-color: rgba(51, 65, 85, 0.9); margin-bottom: 0.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <div class="table-container" style="border: none;">
+          <table>
+            <thead>
+              <tr style="background: rgba(2, 6, 23, 0.95); border-bottom: 2px solid #334155;">
+                <th style="width: 17%; padding: 12px 14px; color: #fff; font-size: 0.86rem;">영역 및 핵심기제</th>
+                <th style="width: 23%; padding: 12px 14px; color: #fff; font-size: 0.86rem;">주요 프로그램 및 실천 활동</th>
+                <th style="width: 25%; padding: 12px 14px; color: #fff; font-size: 0.86rem;">학생 성장의 질적 전환 (Before ➔ After)</th>
+                <th style="width: 21%; padding: 12px 14px; color: #fff; font-size: 0.86rem;">심층면담 학생 실제 발화</th>
+                <th style="width: 14%; padding: 12px 14px; color: #fff; font-size: 0.86rem;">교육적 의의</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1: 학습성장 -->
+              <tr style="border-bottom: 1px solid rgba(51, 65, 85, 0.6); background: rgba(16, 185, 129, 0.03);">
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <span class="badge badge-em">01. 학습성장</span>
+                  <div style="font-weight: 900; color: #fff; font-size: 0.95rem; margin-top: 4px;">맞춤형 개별화 학습</div>
+                  <div style="font-size: 0.78rem; color: #94a3b8; font-weight: 700; margin-top: 2px;">기제: 배움 (LEARNING)</div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <ul style="padding-left: 14px; margin: 0; font-size: 0.83rem; line-height: 1.5; color: #cbd5e1;">
+                    <li>1:1 원어민 화상영어 (주 2회)</li>
+                    <li>본교 교사 밀착 보충 코칭</li>
+                    <li>자기주도 5단계 학습플래너</li>
+                  </ul>
+                  <div style="margin-top: 6px; font-size: 0.74rem; color: #a7f3d0; font-family: monospace; background: rgba(16, 185, 129, 0.1); padding: 4px 8px; border-radius: 4px;">
+                    진단/개별화 ➔ 즉각 피드백 ➔ 학력 신뢰
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <div style="padding: 6px 8px; background: rgba(244, 63, 94, 0.1); border-left: 3px solid #f43f5e; border-radius: 4px; font-size: 0.78rem; margin-bottom: 6px;">
+                    <strong style="color: #fda4af;">[이전 한계]</strong> 학습 실패 두려움 & 피동적 수동 학습
+                  </div>
+                  <div style="padding: 6px 8px; background: rgba(16, 185, 129, 0.15); border-left: 3px solid var(--emerald); border-radius: 4px; font-size: 0.78rem;">
+                    <strong style="color: #6ee7b7;">[계촌 도약]</strong> 자율적 목표 설정 & 성찰 습관 정착
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <div style="padding: 8px 10px; background: #020617; border: 1px solid #334155; border-radius: 8px; font-size: 0.82rem; color: #a7f3d0; font-style: italic; line-height: 1.4;">
+                    "원어민 선생님과 매주 말하면서 영어에 대한 두려움이 완전히 사라졌어요."
+                    <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px; text-align: right; font-style: normal;">(학생 101)</div>
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px; font-size: 0.8rem; color: #cbd5e1; line-height: 1.4;">
+                  소규모 학교 1:1 밀착 교육력으로 도시 이상의 기초학력 신뢰 구축
+                </td>
+              </tr>
 
-        <div class="card" style="border-left: 5px solid var(--teal);">
-          <div class="badge badge-tl">02. 진로·미래역량</div>
-          <h4 class="card-title">한계 돌파 경험 ➔ 미래역량 및 효능감</h4>
-          <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 6px;">
-            • <strong>발전 경로:</strong> 항공역학 탐색 ➔ 집중 실기비행 ➔ 국가 1종 자격 ➔ 농촌 첨단산업 연계<br />
-            • <strong>질적 전환:</strong> [이전] 진로 탐색 기회 부재 ➔ <strong>[도약] 고난도 자격 취득을 통한 강력한 효능감</strong>
-          </p>
-          <div style="padding: 6px 10px; background: rgba(20, 184, 166, 0.1); border-radius: 6px; font-size: 0.82rem; color: #99f6e4; font-style: italic;">
-            "처음엔 어려웠지만 반복연습 끝에 무조건 도전해보는 걸로 생각이 바뀌었어요."
-          </div>
-        </div>
+              <!-- Row 2: 진로·미래 -->
+              <tr style="border-bottom: 1px solid rgba(51, 65, 85, 0.6); background: rgba(20, 184, 166, 0.03);">
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <span class="badge badge-tl">02. 진로·미래</span>
+                  <div style="font-weight: 900; color: #fff; font-size: 0.95rem; margin-top: 4px;">첨단 미래역량</div>
+                  <div style="font-size: 0.78rem; color: #94a3b8; font-weight: 700; margin-top: 2px;">기제: 도전 (CHALLENGE)</div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <ul style="padding-left: 14px; margin: 0; font-size: 0.83rem; line-height: 1.5; color: #cbd5e1;">
+                    <li>항공역학 이론 & 시뮬레이터</li>
+                    <li>실기 비행장 집중 반복 훈련</li>
+                    <li>무인멀티콥터 1종 조종자 전원합격</li>
+                  </ul>
+                  <div style="margin-top: 6px; font-size: 0.74rem; color: #99f6e4; font-family: monospace; background: rgba(20, 184, 166, 0.1); padding: 4px 8px; border-radius: 4px;">
+                    기술 탐색 ➔ 한계 극복 ➔ 국가자격 쟁취
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <div style="padding: 6px 8px; background: rgba(244, 63, 94, 0.1); border-left: 3px solid #f43f5e; border-radius: 4px; font-size: 0.78rem; margin-bottom: 6px;">
+                    <strong style="color: #fda4af;">[이전 한계]</strong> 진로 기회 부재 & 막연한 미래 불안
+                  </div>
+                  <div style="padding: 6px 8px; background: rgba(20, 184, 166, 0.15); border-left: 3px solid var(--teal); border-radius: 4px; font-size: 0.78rem;">
+                    <strong style="color: #5eead4;">[계촌 도약]</strong> 고난도 자격 취득을 통한 강력한 자기효능감
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <div style="padding: 8px 10px; background: #020617; border: 1px solid #334155; border-radius: 8px; font-size: 0.82rem; color: #99f6e4; font-style: italic; line-height: 1.4;">
+                    "처음엔 어려웠지만 반복연습 끝에 무조건 도전해보는 걸로 생각이 바뀌었어요."
+                    <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px; text-align: right; font-style: normal;">(학생 102)</div>
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px; font-size: 0.8rem; color: #cbd5e1; line-height: 1.4;">
+                  첨단 산업 국가기술 장착으로 농어촌 학생의 자존감 및 미래 개척력 형성
+                </td>
+              </tr>
 
-        <div class="card" style="border-left: 5px solid var(--cyan);">
-          <div class="badge badge-cy">03. 문화예술·공동체</div>
-          <h4 class="card-title">예술 실천과 확장 ➔ 문화감수성 및 화합</h4>
-          <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 6px;">
-            • <strong>발전 경로:</strong> 축제 합주(실천) ➔ 서울 페스티벌(경험) ➔ LP 청음(향유) ➔ 정서적 공명<br />
-            • <strong>질적 전환:</strong> [이전] 농어촌 문화소외 ➔ <strong>[도약] 무대 위 주체이자 예술 향유자로 성장</strong>
-          </p>
-          <div style="padding: 6px 10px; background: rgba(6, 182, 212, 0.1); border-radius: 6px; font-size: 0.82rem; color: #a5f3fc; font-style: italic;">
-            "연주를 마치고 관객 박수를 받을 때 친구들과 하나가 되는 기분이었어요."
-          </div>
-        </div>
+              <!-- Row 3: 문화예술 -->
+              <tr style="border-bottom: 1px solid rgba(51, 65, 85, 0.6); background: rgba(6, 182, 212, 0.03);">
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <span class="badge badge-cy">03. 문화예술</span>
+                  <div style="font-weight: 900; color: #fff; font-size: 0.95rem; margin-top: 4px;">문화감수성·화합</div>
+                  <div style="font-size: 0.78rem; color: #94a3b8; font-weight: 700; margin-top: 2px;">기제: 향유 (APPRECIATE)</div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <ul style="padding-left: 14px; margin: 0; font-size: 0.83rem; line-height: 1.5; color: #cbd5e1;">
+                    <li>계촌클래식축제 별빛오케스트라</li>
+                    <li>서울 청소년 오케스트라 페스티벌</li>
+                    <li>강릉 LP 바이닐 청음 & 인문학</li>
+                  </ul>
+                  <div style="margin-top: 6px; font-size: 0.74rem; color: #a5f3fc; font-family: monospace; background: rgba(6, 182, 212, 0.1); padding: 4px 8px; border-radius: 4px;">
+                    주체적 실천 ➔ 경험 확장 ➔ 정서적 공명
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <div style="padding: 6px 8px; background: rgba(244, 63, 94, 0.1); border-left: 3px solid #f43f5e; border-radius: 4px; font-size: 0.78rem; margin-bottom: 6px;">
+                    <strong style="color: #fda4af;">[이전 한계]</strong> 농어촌 문화 소외 & 수동적 관람자
+                  </div>
+                  <div style="padding: 6px 8px; background: rgba(6, 182, 212, 0.15); border-left: 3px solid var(--cyan); border-radius: 4px; font-size: 0.78rem;">
+                    <strong style="color: #67e8f9;">[계촌 도약]</strong> 무대 위 주인공이자 높은 문화예술 향유자
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <div style="padding: 8px 10px; background: #020617; border: 1px solid #334155; border-radius: 8px; font-size: 0.82rem; color: #a5f3fc; font-style: italic; line-height: 1.4;">
+                    "연주를 마치고 관객 박수를 받을 때 심장이 뛰고 친구들과 하나가 되었어요."
+                    <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px; text-align: right; font-style: normal;">(학생 202)</div>
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px; font-size: 0.8rem; color: #cbd5e1; line-height: 1.4;">
+                  지역 문화 브랜드(클래식축제)를 교육과정화하여 예술적 자긍심과 공동체 화합 확립
+                </td>
+              </tr>
 
-        <div class="card" style="border-left: 5px solid var(--amber);">
-          <div class="badge badge-am">04. 지역연계·공동체</div>
-          <h4 class="card-title">지역과 함께 배움 ➔ 장소애착 및 상생</h4>
-          <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 6px;">
-            • <strong>발전 경로:</strong> 스마트축산(이해) ➔ 심리정서(관계) ➔ 학교야영(소속) ➔ 상생 생태계<br />
-            • <strong>질적 전환:</strong> [이전] 단절된 거주 공간 ➔ <strong>[도약] 삶과 배움이 살아 숨쉬는 따뜻한 삶터</strong>
-          </p>
-          <div style="padding: 6px 10px; background: rgba(245, 158, 11, 0.1); border-radius: 6px; font-size: 0.82rem; color: #fde68a; font-style: italic;">
-            "학교 야영을 하고 나서 전학생과 원래 친구들이 가족처럼 끈끈해졌어요."
-          </div>
+              <!-- Row 4: 지역연계 -->
+              <tr style="background: rgba(245, 158, 11, 0.03);">
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <span class="badge badge-am">04. 지역연계</span>
+                  <div style="font-weight: 900; color: #fff; font-size: 0.95rem; margin-top: 4px;">장소애착·상생</div>
+                  <div style="font-size: 0.78rem; color: #94a3b8; font-weight: 700; margin-top: 2px;">기제: 소속 (BELONGING)</div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <ul style="padding-left: 14px; margin: 0; font-size: 0.83rem; line-height: 1.5; color: #cbd5e1;">
+                    <li>서울대 평창목장 스마트축산 이음</li>
+                    <li>원주 DB 프로농구 & 문화체험</li>
+                    <li>1박2일 학교야영(텐트 밖은 계촌)</li>
+                  </ul>
+                  <div style="margin-top: 6px; font-size: 0.74rem; color: #fde047; font-family: monospace; background: rgba(245, 158, 11, 0.1); padding: 4px 8px; border-radius: 4px;">
+                    지역산업 이해 ➔ 관계 회복 ➔ 상생 생태계
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <div style="padding: 6px 8px; background: rgba(244, 63, 94, 0.1); border-left: 3px solid #f43f5e; border-radius: 4px; font-size: 0.78rem; margin-bottom: 6px;">
+                    <strong style="color: #fda4af;">[이전 한계]</strong> 거주지로서의 단절되고 고립된 마을
+                  </div>
+                  <div style="padding: 6px 8px; background: rgba(245, 158, 11, 0.15); border-left: 3px solid var(--amber); border-radius: 4px; font-size: 0.78rem;">
+                    <strong style="color: #fde047;">[계촌 도약]</strong> 삶과 배움이 하나 되는 따뜻한 삶터·애향심
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px;">
+                  <div style="padding: 8px 10px; background: #020617; border: 1px solid #334155; border-radius: 8px; font-size: 0.82rem; color: #fde68a; font-style: italic; line-height: 1.4;">
+                    "학교 야영을 하고 나서 전학생과 원래 친구들이 가족처럼 끈끈해졌어요."
+                    <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px; text-align: right; font-style: normal;">(학생 201)</div>
+                  </div>
+                </td>
+                <td style="vertical-align: top; padding: 12px 14px; font-size: 0.8rem; color: #cbd5e1; line-height: 1.4;">
+                  장소기반교육(PBE)을 통해 농어촌유학생의 정주성을 높이고 마을 교육생태계 회복
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -1054,12 +1120,6 @@
     </div>
   </footer>
 </div>
-
-<!-- 플로팅 깃허브 배포 버튼 (화면 우측 하단 상시 노출) -->
-<button class="floating-github-btn" onclick="openGitHubModal()" title="깃허브 배포 가이드 & index.html 파일 받기">
-  <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-  <span>깃허브 배포 / 파일받기</span>
-</button>
 
 <!-- 발표해설 모달 -->
 <div class="overlay" id="notes-overlay">
@@ -1239,17 +1299,23 @@
 
   // 발표용 글자 크기 순환 토글 (보통 -> 크게 -> 특대)
   function toggleFontSize() {
-    const b = document.body;
+    const root = document.documentElement;
     const label = document.getElementById('font-size-label');
-    if (b.classList.contains('pt-large')) {
-      b.classList.remove('pt-large');
-      b.classList.add('pt-xlarge');
+    root.classList.remove('pt-normal', 'pt-large', 'pt-xlarge');
+    if (!root.dataset.ptSize || root.dataset.ptSize === 'large') {
+      root.dataset.ptSize = 'xlarge';
+      root.classList.add('pt-xlarge');
+      root.style.fontSize = '21.5px';
       if (label) label.textContent = '특대';
-    } else if (b.classList.contains('pt-xlarge')) {
-      b.classList.remove('pt-xlarge');
+    } else if (root.dataset.ptSize === 'xlarge') {
+      root.dataset.ptSize = 'normal';
+      root.classList.add('pt-normal');
+      root.style.fontSize = '16px';
       if (label) label.textContent = '보통';
     } else {
-      b.classList.add('pt-large');
+      root.dataset.ptSize = 'large';
+      root.classList.add('pt-large');
+      root.style.fontSize = '18.5px';
       if (label) label.textContent = '크게';
     }
   }
@@ -1418,6 +1484,13 @@
 
   // 초기화 (DOM 준비 즉시 실행)
   function init() {
+    try {
+      const root = document.documentElement;
+      root.dataset.ptSize = 'large';
+      root.classList.add('pt-large');
+      root.style.fontSize = '18.5px';
+    } catch (e) {}
+
     try {
       document.querySelectorAll('.photo-slot').forEach(slot => {
         const saved = localStorage.getItem('photo_' + slot.id);
