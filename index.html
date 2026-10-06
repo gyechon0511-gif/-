@@ -1,296 +1,1013 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>Cookie check</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>계촌중학교 연구학교 운영보고서 발표 프리젠테이션</title>
+  <meta name="description" content="유학이 살리고, 마을이 자라는 지속가능한 농어촌 교육생태계 구축 방안 연구 - 2026학년도 강원특별자치도교육청 지정 연구(시범)학교 운영 결과보고" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       계촌중학교 연구학교 운영보고서 발표 프리젠테이션 (Standalone Single-File)
+       외부 폴더 없이 파일 1개만으로 작동하는 완전 자립형 슬라이드 덱
+       ═══════════════════════════════════════════════════════════════ */
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --card-border: rgba(51, 65, 85, 0.7);
+      --emerald: #10b981;
+      --teal: #14b8a6;
+      --cyan: #06b6d4;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-sub: #cbd5e1;
+      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      --font-serif: "Noto Serif KR", Georgia, serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; overflow: hidden; background: var(--bg); font-family: var(--font-sans); color: var(--text-main); word-break: keep-all; }
+    
+    #viewport { position: fixed; inset: 0; display: flex; flex-direction: column; overflow: hidden; }
+    
+    /* 상단 네비게이션 바 */
+    header#top-bar {
+      height: 52px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(51, 65, 85, 0.8); display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.25rem; z-index: 30; flex-shrink: 0;
+    }
+    .brand-title { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.95rem; color: #fff; font-family: var(--font-serif); }
+    .brand-badge { background: rgba(16, 185, 129, 0.15); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; padding: 2px 8px; font-size: 0.75rem; font-family: var(--font-sans); font-weight: 600; }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+    .nav-btn {
+      background: rgba(30, 41, 59, 0.7); color: var(--text-sub); border: 1px solid rgba(51, 65, 85, 0.6);
+      border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.18s var(--ease);
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .nav-btn:hover { background: #334155; color: #fff; border-color: #64748b; }
 
-      body {
-        font-family: 'Inter', Helvetica, Arial, sans-serif;
-        background: light-dark(#F8F8F7, #191919);
-        color: light-dark(#1f1f1f, #e3e3e3);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        min-height: 100vh;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-      }
+    /* 메인 슬라이드 캔버스 */
+    main#deck { flex: 1; position: relative; overflow-y: auto; padding: 1.5rem; display: flex; justify-content: center; align-items: center; }
+    .slide { display: none; width: 100%; max-width: 1140px; margin: auto; animation: fadeIn 0.25s var(--ease) forwards; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-      .container {
-        background: light-dark(#FFFFFF, #1F1F1F);
-        padding: 32px;
-        border-radius: 16px;
-        border: 1px solid light-dark(#E2E3E4, #3E3E3E);
-        max-width: min(80%, 500px);
-        width: 100%;
-        color: light-dark(#2B2D31, #D4D4D4);
-      }
+    /* 슬라이드 헤더 */
+    .slide-header { border-bottom: 1px solid rgba(51, 65, 85, 0.8); padding-bottom: 0.85rem; margin-bottom: 1.25rem; }
+    .slide-kicker { font-size: 0.75rem; font-weight: 700; color: var(--emerald); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px; }
+    .slide-title { font-size: 1.75rem; font-weight: 800; font-family: var(--font-serif); color: #fff; margin-top: 4px; line-height: 1.3; }
+    .slide-sub { font-size: 0.875rem; color: var(--text-muted); margin-top: 4px; }
 
-      h1 {
-        font-size: 20px;
-        font-weight: 500;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        color: light-dark(#2B2D31, #D4D4D4);
-      }
+    /* 카드 및 그리드 레이아웃 */
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.25rem; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.65rem; }
+    @media (max-width: 860px) {
+      .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+      .slide-title { font-size: 1.35rem; }
+    }
 
-      p {
-        font-size: 14px;
-        color: light-dark(#2B2D31, #D4D4D4);
-        line-height: 21px;
-        margin: 0 0 1.5rem 0;
-      }
+    /* 데이터 표 */
+    .table-container { overflow-x: auto; border-radius: 10px; border: 1px solid #334155; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left; }
+    th { background: #0f172a; color: #94a3b8; padding: 8px 12px; font-weight: 600; border-bottom: 1px solid #334155; }
+    td { padding: 9px 12px; border-bottom: 1px solid rgba(51, 65, 85, 0.4); color: #cbd5e1; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(30, 41, 59, 0.4); }
 
-      .icon {
-        margin-bottom: 1rem;
-        line-height: 0;
-      }
+    /* 사진 슬롯 카드 */
+    .photo-slot {
+      background: #0f172a; border: 1px dashed #334155; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+      position: relative; transition: border-color 0.2s;
+    }
+    .photo-slot:hover { border-color: var(--emerald); }
+    .photo-preview-wrap {
+      width: 100%; aspect-ratio: 4/3; background: #020617; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .photo-img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-empty { text-align: center; padding: 1rem; color: #64748b; }
+    .photo-empty-icon { font-size: 1.5rem; margin-bottom: 4px; display: block; color: var(--emerald); }
+    .photo-footer { padding: 10px; background: #0f172a; border-top: 1px solid #1e293b; display: flex; flex-direction: column; gap: 4px; }
+    .photo-title { font-size: 0.78rem; font-weight: 700; color: #fff; }
+    .photo-caption { font-size: 0.7rem; color: #94a3b8; font-style: italic; }
+    .photo-btn {
+      margin-top: 6px; background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 4px 8px; font-size: 0.7rem;
+      color: #cbd5e1; cursor: pointer; text-align: center; transition: all 0.2s;
+    }
+    .photo-btn:hover { background: var(--emerald); color: #022c22; font-weight: 700; }
 
-      .button-container {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 2rem;
-      }
+    /* 하단 컨트롤 바 */
+    footer#bottom-bar {
+      height: 54px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(51, 65, 85, 0.8); display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.25rem; z-index: 30; flex-shrink: 0; position: relative;
+    }
+    #prog-bar { position: absolute; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--emerald), var(--teal)); width: 5%; transition: width 0.3s; }
+    .slide-counter { font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #cbd5e1; display: flex; align-items: center; gap: 8px; }
+    .btn-group { display: flex; align-items: center; gap: 8px; }
+    .ctrl-btn {
+      background: #1e293b; border: 1px solid #334155; color: #fff; padding: 6px 14px; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s;
+    }
+    .ctrl-btn:hover { background: #334155; }
+    .ctrl-btn.primary { background: var(--emerald); color: #022c22; border-color: var(--emerald); }
+    .ctrl-btn.primary:hover { background: #34d399; }
+    .ctrl-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-      button {
-        background-color: light-dark(#fff, #323232);
-        color: light-dark(#2B2D31, #FCFCFC);
-        border: 1px solid light-dark(#E2E3E4, #3E3E3E);
-        border-radius: 12px;
-        padding: 8px 12px;
-        font-size: 14px;
-        line-height: 21px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        font-weight: 400;
-        font-family: 'Inter', Helvetica, Arial, sans-serif;
-        width: 100%;
-      }
+    /* 오버레이 모달 */
+    .overlay {
+      position: fixed; inset: 0; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(6px);
+      z-index: 100; display: none; align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .overlay.show { display: flex; }
+    .modal-box {
+      width: 100%; max-width: 860px; max-height: 85vh; background: #0f172a; border: 1px solid #334155; border-radius: 16px;
+      display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+    .modal-head { padding: 1rem 1.25rem; border-bottom: 1px solid #1e293b; display: flex; align-items: center; justify-content: space-between; }
+    .modal-body { padding: 1.25rem; overflow-y: auto; flex: 1; }
+    .modal-close { background: none; border: none; font-size: 1.25rem; color: #94a3b8; cursor: pointer; }
 
-      button:hover {
-        background-color: light-dark(#EAEAEB, #424242);
-      }
+    /* 유인물 / 인쇄 모드 */
+    body.handout-mode { overflow-y: auto; }
+    body.handout-mode #top-bar, body.handout-mode #bottom-bar { display: none !important; }
+    body.handout-mode main#deck { display: block; overflow: visible; padding: 2rem 1rem; }
+    body.handout-mode .slide { display: block !important; margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px dashed #334155; }
 
-      .hidden {
-        display: none;
-      }
+    .badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-right: 4px; }
+    .badge-em { background: rgba(16, 185, 129, 0.2); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-tl { background: rgba(20, 184, 166, 0.2); color: var(--teal); border: 1px solid rgba(20, 184, 166, 0.4); }
+    .badge-am { background: rgba(245, 158, 11, 0.2); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-ro { background: rgba(244, 63, 94, 0.2); color: var(--rose); border: 1px solid rgba(244, 63, 94, 0.4); }
+  </style>
+</head>
+<body>
 
-      /* Loading Spinner Animation */
-      .spinner {
-        margin: 0 auto 1.5rem auto;
-        width: 40px;
-        height: 40px;
-        border: 4px solid light-dark(#f0f0f0, #262626);
-        border-top: 4px solid light-dark(#076eff, #87a9ff); /* Blue color */
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
+<div id="viewport">
+  <header id="top-bar">
+    <div class="brand-title">
+      <span>🏫</span>
+      <span>계촌중 연구학교 운영보고</span>
+      <span class="brand-badge">2026.10</span>
+    </div>
 
-      .logo {
-        border-radius: 10px;
-        display: block;
-        margin: 0 auto 2rem auto;
-      }
+    <div class="nav-links">
+      <button class="nav-btn" onclick="openGrid()">📑 슬라이드 전체</button>
+      <button class="nav-btn" onclick="openNotes()">🎙️ 발표해설</button>
+      <button class="nav-btn" onclick="toggleHandout()">🖨️ 인쇄/유인물</button>
+      <button class="nav-btn" onclick="toggleFullscreen()">⛶ 전체화면</button>
+    </div>
+  </header>
 
-      .logo.hidden {
-        display: none;
-      }
+  <main id="deck">
 
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <img
-        class="logo"
-        src="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png"
-        alt="AI Studio Logo"
-        width="256"
-        height="256"
-      />
-      <div class="spinner"></div>
-      <div id="error-ui" class="hidden">
-        <div class="icon">
-          <svg
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="48px"
-            height="48px"
-            fill="#D73A49"
-          >
-            <path
-              d="M12,2C6.486,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.514,2,12,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z"
-            />
-          </svg>
+    <!-- 슬라이드 01: 표지 -->
+    <section class="slide active" id="s1" data-title="운영보고서 표지">
+      <div class="card" style="padding: 3rem 2rem; text-align: center; border-color: rgba(16, 185, 129, 0.4); background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);">
+        <div style="display: inline-block; padding: 4px 12px; background: rgba(16, 185, 129, 0.2); color: var(--emerald); border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem;">
+          강원특별자치도교육청 지정 연구(시범)학교 운영 결과보고서
         </div>
-        <div id="stepOne" class="text-container">
-          <h1>Action required to load your app</h1>
-          <p>
-            It looks like your browser is blocking a required security cookie, which is common on
-            older versions of iOS and Safari.
+        <h1 style="font-size: 2.3rem; font-family: var(--font-serif); font-weight: 900; line-height: 1.35; margin-bottom: 1rem; color: #fff;">
+          유학이 살리고, 마을이 자라는<br />
+          <span style="color: var(--emerald);">지속가능한 농어촌 교육생태계</span> 구축 방안 연구
+        </h1>
+        <p style="font-size: 1rem; color: #94a3b8; max-width: 720px; margin: 0 auto 2rem auto; line-height: 1.6;">
+          전교생 11명의 평창 계촌중학교가 마을의 클래식 문화와 첨단 미래기술을 결합하여 실천한 중학교형 농어촌유학 질적 사례연구
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1.5rem; font-size: 0.85rem; color: #cbd5e1; border-top: 1px solid #334155; padding-top: 1.5rem; flex-wrap: wrap;">
+          <div><strong>연구학교:</strong> 계촌중학교 (평창)</div>
+          <div><strong>연구영역:</strong> 교육과정</div>
+          <div><strong>운영기간:</strong> 2026. 3. 1. ~ 2027. 2. 28. (1/1)</div>
+        </div>
+        <div style="margin-top: 2rem;">
+          <button class="ctrl-btn primary" onclick="go(1)" style="font-size: 0.9rem; padding: 8px 24px;">발표 시작하기 (다음 슬라이드) →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 02: 목차 -->
+    <section class="slide" id="s2" data-title="보고서 목차">
+      <div class="slide-header">
+        <div class="slide-kicker">TABLE OF CONTENTS</div>
+        <h2 class="slide-title">운영보고서 주요 목차 안내</h2>
+        <p class="slide-sub">각 장을 클릭하시면 해당 슬라이드로 바로 이동합니다.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card" onclick="go(2)" style="cursor: pointer;"><span class="badge badge-em">Ⅰ</span><h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 6px;">연구의 개요</h3><p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">필요성, 3대 목적, 범위 및 제한점, 핵심 용어 정의</p></div>
+        <div class="card" onclick="go(4)" style="cursor: pointer;"><span class="badge badge-tl">Ⅱ</span><h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 6px;">이론적 배경 & 실태</h3><p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">관계인구·생태계·회복력·PBE 4대 이론, 학생수 변화, SWOT</p></div>
+        <div class="card" onclick="go(6)" style="cursor: pointer;"><span class="badge badge-am">Ⅲ</span><h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 6px;">연구 과제 설정</h3><p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">과제 1(기반), 과제 2(프로그램 운영), 과제 3(평가·나눔)</p></div>
+        <div class="card" onclick="go(7)" style="cursor: pointer;"><span class="badge badge-ro">Ⅳ</span><h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 6px;">연구의 설계 & 도구</h3><p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">추진 절차, 연구 조직, 8단계 질적분석 절차, 심층면담</p></div>
+        <div class="card" onclick="go(9)" style="cursor: pointer;"><span class="badge badge-em">Ⅴ</span><h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 6px;">연구의 실제</h3><p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">교원역량강화, 학습·진로·예술·지역 4대 특화 프로그램</p></div>
+        <div class="card" onclick="go(15)" style="cursor: pointer;"><span class="badge badge-tl">Ⅵ</span><h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 6px;">연구 결과 & 모델</h3><p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">활동별 질적 코딩 브라우저, 4대 영역 통합분석, 계촌형 모델</p></div>
+        <div class="card" onclick="go(18)" style="cursor: pointer;"><span class="badge badge-am">Ⅶ</span><h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 6px;">결론 및 제언</h3><p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">연구 결론, 농어촌유학 활성화를 위한 5대 정책 제언</p></div>
+        <div class="card" onclick="go(19)" style="cursor: pointer;"><span class="badge badge-ro">Ⅷ</span><h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 6px;">성과 및 계획 / Q&A</h3><p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">1차년도 성과 총괄, 2차년도 고도화 계획, 질의응답</p></div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 03: Ⅰ. 필요성 및 목적 -->
+    <section class="slide" id="s3" data-title="Ⅰ. 연구의 필요성 및 목적">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅰ. 연구의 개요 · 1. 필요성 & 2. 목적</div>
+        <h2 class="slide-title">연구의 필요성 및 3대 목적</h2>
+        <p class="slide-sub">작은 학교의 위기를 지역 교육자원 기반 상생 교육생태계로 전환</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-size: 1rem; font-weight: 700; color: var(--rose); margin-bottom: 0.75rem;">1. 연구의 필요성</h3>
+          <ul style="font-size: 0.78rem; line-height: 1.6; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>학령인구 감소와 지역소멸:</strong> 단순 학생 유입을 넘어 마을과 학교가 함께 존속하는 운영체계 필요.</li>
+            <li><strong>일회성 체험의 한계 극복:</strong> 정규 교과, 창체, 방과후, 주말 활동을 유기적으로 연계하는 체계적 교육과정 절실.</li>
+            <li><strong>중학교급 농어촌유학의 특수성:</strong> 진로 탐색, 교과학습의 연속성, 심리·정서 안정 발달 과제를 포괄하는 통합 모델 필수.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 1rem; font-weight: 700; color: var(--emerald); margin-bottom: 0.75rem;">2. 연구의 3대 목적</h3>
+          <ul style="font-size: 0.78rem; line-height: 1.6; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>목적 1:</strong> 클래식축제, 오케스트라, 드론자격, 화상영어 등 지역자원 활용 특화 교육과정 운영으로 학생 역량 함양.</li>
+            <li><strong>목적 2:</strong> 학습코칭 및 심리정서 지원을 통해 유학생과 재학생이 함께 성장하고 마을이 지원하는 교육생태계 조성.</li>
+            <li><strong>목적 3:</strong> 학생 심층면담 중심의 질적 사례연구로 변화를 분석하고 강원도형 일반화 매뉴얼 도출.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 04: Ⅰ. 범위 및 용어 정의 -->
+    <section class="slide" id="s4" data-title="Ⅰ. 범위 및 핵심 용어 정의">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅰ. 연구의 개요 · 3. 범위 & 4. 용어 정의</div>
+        <h2 class="slide-title">연구의 범위, 제한점 및 핵심 용어 정의</h2>
+        <p class="slide-sub">전교생 11명의 소규모 학교가 실현한 농어촌 교육의 새로운 지평</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">연구의 범위 및 대상</h3>
+          <p style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.6;">
+            • <strong>연구 대상:</strong> 계촌중학교 전교생 11명 (원학구 재학생, 농어촌유학생, 일반전학생) 및 교원 7명, 학부모<br />
+            • <strong>연구 기간:</strong> 2026. 3. 1. ~ 2027. 2. 28. (1차년도)<br />
+            • <strong>연구 특징:</strong> 유학생뿐 아니라 학교 교육 매력도를 보고 일반전학을 온 학생까지 포함하여 전체 학교 구성원의 성장을 분석.
           </p>
-          <div class="button-container">
-            <button id="authInSeparateWindowButton" onclick="redirectToReturnUrl(true)">Authenticate in new window</button>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--emerald);">
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--emerald); margin-bottom: 0.5rem;">핵심 용어: 계촌형 농어촌유학 모델</h3>
+          <p style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.6;">
+            계촌 지역의 문화예술 자원(계촌클래식축제, 오케스트라)과 지역 인프라(드론 자격, 스마트목장, 화상영어)를 정규 교육과정으로 재구성하고, 학교-가정-마을-지자체가 결합된 전주기 정착지원 체계를 구축한 <strong>중학교 중심의 상생형 교육생태계 모델</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 05: Ⅱ. 이론적 배경 -->
+    <section class="slide" id="s5" data-title="Ⅱ. 4대 이론적 배경">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅱ. 이론적 배경 · 4대 이론적 기저</div>
+        <h2 class="slide-title">농어촌유학의 정책적·학술적 4대 기저</h2>
+        <p class="slide-sub">관계인구 · 교육생태계 · 회복력 · 장소기반교육(PBE)</p>
+      </div>
+      <div class="grid-4">
+        <div class="card">
+          <span class="badge badge-em">이론 01</span>
+          <h4 style="font-size: 0.9rem; font-weight: 700; margin: 4px 0;">관계인구 이론</h4>
+          <p style="font-size: 0.72rem; color: #94a3b8; margin-bottom: 6px;">KREI (2021)</p>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5;">단순 관광을 넘어 지역과 지속적 유대를 맺는 인구. 학교가 거점이 되어 장기 정주인구로의 전환을 촉진.</p>
+        </div>
+        <div class="card">
+          <span class="badge badge-tl">이론 02</span>
+          <h4 style="font-size: 0.9rem; font-weight: 700; margin: 4px 0;">교육생태계 이론</h4>
+          <p style="font-size: 0.72rem; color: #94a3b8; margin-bottom: 6px;">Bronfenbrenner (1979)</p>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5;">미시(학교·가정)-중간(마을연계)-외체계(교육청·지자체)가 유기적으로 상호작용하여 학생 전인적 발달 지원.</p>
+        </div>
+        <div class="card">
+          <span class="badge badge-am">이론 03</span>
+          <h4 style="font-size: 0.9rem; font-weight: 700; margin: 4px 0;">회복력 이론</h4>
+          <p style="font-size: 0.72rem; color: #94a3b8; margin-bottom: 6px;">Walker et al. (2004)</p>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5;">소규모화 위기 속에서도 학교와 마을이 내부 자원을 재발견하여 새로운 교육적 가치를 창출하는 회복 역량.</p>
+        </div>
+        <div class="card">
+          <span class="badge badge-ro">이론 04</span>
+          <h4 style="font-size: 0.9rem; font-weight: 700; margin: 4px 0;">장소기반교육 (PBE)</h4>
+          <p style="font-size: 0.72rem; color: #94a3b8; margin-bottom: 6px;">Dewey (1938), Sobel (2004)</p>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5;">학생이 살아가는 지역의 문화·산업·자연을 교과 배움의 자원으로 전환하여 삶과 앎을 일치시키는 교육철학.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 06: Ⅱ. 실태 분석 및 SWOT -->
+    <section class="slide" id="s6" data-title="Ⅱ. 실태 분석 & SWOT">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅱ. 실태 분석 · 학생수 변화 & SWOT (그림 1)</div>
+        <h2 class="slide-title">실태 분석 및 SWOT 전략 매트릭스</h2>
+        <p class="slide-sub">일반전학생 유입 성과와 학교 지속가능성을 위한 4대 전략 방향</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--emerald); margin-bottom: 6px;">[표 2] 2026학년도 학생 수 변화 (총 11명)</h4>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>구분</th><th>1학년</th><th>2학년</th><th>3학년</th><th>총계</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>원학구 재학생</td><td>3명</td><td>5명</td><td>1명</td><td>9명</td></tr>
+                <tr style="color: var(--emerald);"><td>유학생 / 전학생</td><td>+1 (유학)</td><td>-</td><td>+1 (전학)</td><td>+2명</td></tr>
+                <tr style="font-weight: 700; color: #fff; background: #020617;"><td>최종 재학생수</td><td>4명</td><td>5명</td><td>2명</td><td>총 11명</td></tr>
+              </tbody>
+            </table>
           </div>
+          <p style="font-size: 0.72rem; color: #94a3b8; margin-top: 6px;">* 교육 매력도로 인해 농어촌유학 외 자발적 일반전학 유입 성과 달성</p>
         </div>
-        <div id="stepTwo" class="text-container hidden">
-          <h1>Action required to load your app</h1>
-          <p>
-            It looks like your browser is blocking a required security cookie, which is common on
-            older versions of iOS and Safari.
-          </p>
-          <div class="button-container">
-            <button id="interactButton" onclick="redirectToReturnUrl(false)">Close and continue</button>
-          </div>
-        </div>
-        <div id="stepThree" class="text-container hidden">
-          <h1>Almost there!</h1>
-          <p>
-            Grant permission for the required security cookie below.
-          </p>
-          <div class="button-container">
-            <button id="grantPermissionButton" onclick="grantStorageAccess()">Grant permission</button>
+
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--teal); margin-bottom: 6px;">SWOT 4대 도출 전략</h4>
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.75rem;">
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">
+              <strong>SO 전략:</strong> 클래식·드론 등 특화 교육과정 고도화 및 일반전학 성과 확산
+            </div>
+            <div style="background: rgba(20, 184, 166, 0.1); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(20, 184, 166, 0.3);">
+              <strong>WO 전략:</strong> 학부모 정착지원 체계 구축 및 주거 인프라 지자체 연계
+            </div>
+            <div style="background: rgba(6, 182, 212, 0.1); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(6, 182, 212, 0.3);">
+              <strong>ST 전략:</strong> 오케스트라·드론 차별화 및 학교 브랜드 스토리 구축
+            </div>
+            <div style="background: rgba(245, 158, 11, 0.1); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(245, 158, 11, 0.3);">
+              <strong>WT 전략:</strong> 지자체·교육청 정례 거버넌스 및 재정 지속성 확보
+            </div>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- 슬라이드 07: Ⅲ. 연구 과제 설정 -->
+    <section class="slide" id="s7" data-title="Ⅲ. 연구 과제 설정">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅲ. 연구 과제 설정 · 체계도 (그림 2)</div>
+        <h2 class="slide-title">3대 연구 과제 실행 체계도</h2>
+        <p class="slide-sub">기반 조성부터 프로그램 실행, 평가·나눔으로 이어지는 선순환</p>
+      </div>
+      <div class="grid-3">
+        <div class="card" style="border-top: 3px solid var(--emerald);">
+          <span class="badge badge-em">연구 과제 1</span>
+          <h3 style="font-size: 0.95rem; font-weight: 700; margin: 6px 0;">운영 기반 조성</h3>
+          <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.5;">
+            가. 스마트 교육환경 구성<br />
+            나. 교육공동체 역량 강화 (전 교원 학습코칭 연수)<br />
+            다. 지역 지원협력 거버넌스 구축
+          </p>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--teal);">
+          <span class="badge badge-tl">연구 과제 2</span>
+          <h3 style="font-size: 0.95rem; font-weight: 700; margin: 6px 0;">프로그램 개발·운영</h3>
+          <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.5;">
+            가. 학생 맞춤형 학습성장 (화상영어, 코칭)<br />
+            나. 진로·미래역량 (무인멀티콥터 드론자격)<br />
+            다. 문화예술·공동체 & 지역연계 체험
+          </p>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--cyan);">
+          <span class="badge badge-am">연구 과제 3</span>
+          <h3 style="font-size: 0.95rem; font-weight: 700; margin: 6px 0;">프로그램 평가·나눔</h3>
+          <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.5;">
+            가. 학생 성장 중심 질적 평가 및 운영 환류<br />
+            나. 교육과정 모듈 및 일반화 매뉴얼 개발<br />
+            다. 강원도형 모델 현장 확산 및 나눔
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 08: Ⅳ. 연구 설계 및 조직 -->
+    <section class="slide" id="s8" data-title="Ⅳ. 연구의 설계 및 조직">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅳ. 연구의 설계 · 추진 절차 (표 3) & 조직 (표 4)</div>
+        <h2 class="slide-title">연구 추진 절차 및 운영 조직도</h2>
+        <p class="slide-sub">계획·준비부터 실행·적용, 결과분석, 일반화까지의 1년 로드맵</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: #fff; margin-bottom: 8px;">연간 4단계 추진 절차</h4>
+          <ul style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6;">
+            <li><strong>1. 계획·준비 (12~2월):</strong> 지역협의체 구축, 유학생 모집 선정, 선행연구</li>
+            <li><strong>2. 과제 1 실행 (3~11월):</strong> 환경 정비, 전 교원 학습코칭 연수, 더배움공동체</li>
+            <li><strong>3. 과제 2 실행 (3~12월):</strong> 4대 특화 프로그램 집중 운영 및 현장체험</li>
+            <li><strong>4. 평가·일반화 (9~2월):</strong> 학생 심층면담 질적분석, 보고서 발간 및 탑재</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--emerald); margin-bottom: 8px;">연구학교 협력 조직 구성</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6;">
+            • <strong>총괄:</strong> 위원장(교장 황○연), 부위원장/담당자(교사 하○수)<br />
+            • <strong>5대 실행 분과:</strong> 연구기획(하○수), 운영실천(최○은), 학생활동지원(이○늘), 연수홍보(김○옥), 평가분석(이○영)<br />
+            • <strong>행정지원 공동체:</strong> 행정실장(예산), 주무관(환경·에듀버스), 교무행정사
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 09: Ⅳ. 연구 도구 (질적분석) -->
+    <section class="slide" id="s9" data-title="Ⅳ. 연구 도구 & 질적분석">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅳ. 연구 도구 · 8단계 질적분석 절차 (그림 3)</div>
+        <h2 class="slide-title">질적 사례연구 절차 및 자료 삼각검증</h2>
+        <p class="slide-sub">수치 통계를 넘어 학생 한 명 한 명의 성장을 심층 포착</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--amber); margin-bottom: 8px;">왜 질적 사례연구인가?</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6;">
+            전교생 11명 소규모 학교에서는 통계 평균의 왜곡이 발생하기 쉽습니다. 이에 학생 사후 심층면담(10문항), 교사 관찰기록지, 활동 결과물을 결합한 <strong>자료 삼각검증(Triangulation)</strong>을 통해 학생 개별 변화의 맥락을 밝힙니다.
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--teal); margin-bottom: 8px;">8단계 질적분석 절차 (그림 3)</h4>
+          <p style="font-size: 0.72rem; color: #cbd5e1; line-height: 1.5;">
+            ① 전사 및 정리 → ② 의미 있는 진술 추출 → ③ 개방코딩(Open Coding) → ④ 유사코드 범주화 → ⑤ 하위·상위범주 구조화 → ⑥ 활동별 핵심주제 도출 → ⑦ 활동 간 공통주제 통합 → ⑧ 계촌형 모델 교육적 의미 해석
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 10: Ⅴ. 과제 1 실행 (역량강화) -->
+    <section class="slide" id="s10" data-title="Ⅴ. 과제 1: 교육공동체 역량 강화">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅴ. 연구의 실제 · 연구 과제 1 실행</div>
+        <h2 class="slide-title">교육공동체 역량 강화 운영 결과 (표 5 & 그림 4)</h2>
+        <p class="slide-sub">전 교원 학습코칭 지도자 연수 이수 및 더배움공동체 정착</p>
+      </div>
+      <div class="grid-3" style="margin-bottom: 1rem;">
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: #fff;">학습코칭 기본과정</h4>
+          <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px;">학생 이해 및 학습코칭 기초 이론 (전 교원 7명 이수)</p>
+          <span class="badge badge-em" style="margin-top: 8px;">맞춤 지도 역량 향상</span>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: #fff;">학습코칭 심화과정</h4>
+          <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px;">심화 학습코칭 및 실제 학생 사례 적용 실습</p>
+          <span class="badge badge-tl" style="margin-top: 8px;">자기주도 지원 강화</span>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: #fff;">더배움공동체 협의</h4>
+          <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px;">사례 공유, 교육과정 재구성 협의, 프로그램 개선</p>
+          <span class="badge badge-am" style="margin-top: 8px;">협력 문화 정착</span>
+        </div>
+      </div>
+      <!-- 사진 슬롯 -->
+      <div class="grid-3">
+        <div class="photo-slot" id="slot-task1-1">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">학습코칭 기본과정 연수</span><span class="photo-caption">"전 교원 학습코칭 기본과정 참여"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-task1-1')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-task1-2">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">학습코칭 심화과정 연수</span><span class="photo-caption">"심화과정 이수 및 사례 토론"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-task1-2')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-task1-3">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">더배움공동체 연구협의</span><span class="photo-caption">"정례 협의 및 학생 성장 나눔"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-task1-3')">사진 등록</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 11: Ⅴ. 과제 2 실행 ① 학습성장 -->
+    <section class="slide" id="s11" data-title="Ⅴ. 과제 2-1: 학습성장 프로그램">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅴ. 연구의 실제 · 과제 2 실행 ① 학습성장</div>
+        <h2 class="slide-title">1:1 원어민 화상영어 & 맞춤형 학습코칭 (표 6·7 & 그림 5·6)</h2>
+        <p class="slide-sub">학교-가정 순환형 회화 지도와 5단계 자기주도 성장 프로세스</p>
+      </div>
+      <div class="grid-2" style="margin-bottom: 1rem;">
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--emerald);">원어민 1:1 화상영어 (표 6)</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5; margin-top: 4px;">
+            • <strong>매주 수 7교시:</strong> 개인 기기로 원어민과 1:1 실시간 회화<br />
+            • <strong>매주 수 8교시:</strong> 본교 영어교사가 어휘·문장 즉시 1:1 보충 피드백<br />
+            • <strong>가정 연계:</strong> 주 1회 복습 과제로 순환 학습체계 완성
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--teal);">5단계 맞춤형 학습코칭 (표 7)</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5; margin-top: 4px;">
+            ① 목표 설정 → ② 실행 계획 수립 → ③ 실천 → ④ 점검(교사 피드백) → ⑤ 성찰의 5단계 순환을 통해 실패를 극복하고 자기주도성 확립.
+          </p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="photo-slot" id="slot-learn-1">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">원어민 1:1 화상수업</span><span class="photo-caption">"개별 노트북 화상영어 회화"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-learn-1')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-learn-2">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">본교 교사 피드백</span><span class="photo-caption">"8교시 개별 맞춤 보충 피드백"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-learn-2')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-learn-3">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">학습코칭 플래너</span><span class="photo-caption">"자기주도 학습 계획 및 성찰"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-learn-3')">사진 등록</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 12: Ⅴ. 과제 2 실행 ② 진로·미래역량 -->
+    <section class="slide" id="s12" data-title="Ⅴ. 과제 2-2: 무인멀티콥터 자격취득">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅴ. 연구의 실제 · 과제 2 실행 ② 진로·미래역량</div>
+        <h2 class="slide-title">무인멀티콥터 1종 조종자 국가자격 취득 (표 8 & 그림 7)</h2>
+        <p class="slide-sub">지역 드론 전문기관 연계 국가공인 자격 취득 및 농촌 미래산업 융합</p>
+      </div>
+      <div class="card" style="margin-bottom: 1rem;">
+        <p style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.6;">
+          만 14세 이상 3학년 진학 예정 학생을 대상으로 일회성 체험이 아닌 <strong>항공이론 → 컴퓨터 시뮬레이터 → 야외 비행장 실기훈련 → 국가공인 시험 응시 및 자격 취득</strong> 전 과정을 운영하였습니다. 스마트 농업, 산림 방제, 재난 감시 등 농어촌 미래산업과 직접 연계하여 진로 인식을 크게 확장했습니다.
+        </p>
+      </div>
+      <div class="grid-3">
+        <div class="photo-slot" id="slot-drone-1">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">항공이론 및 모의비행</span><span class="photo-caption">"시뮬레이터 비행 실습"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-drone-1')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-drone-2">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">야외 실기 비행 훈련</span><span class="photo-caption">"전문 비행 실습장 실기 조종"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-drone-2')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-drone-3">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">국가공인 자격증 취득</span><span class="photo-caption">"1종 조종자 자격증 취득 달성"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-drone-3')">사진 등록</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 13: Ⅴ. 과제 2 실행 ③ 문화예술·공동체 -->
+    <section class="slide" id="s13" data-title="Ⅴ. 과제 2-3: 문화예술·공동체">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅴ. 연구의 실제 · 과제 2 실행 ③ 문화예술</div>
+        <h2 class="slide-title">문화예술·공동체 3대 프로젝트 (표 9·10·11 & 그림 8·9·10)</h2>
+        <p class="slide-sub">참여(Participate) → 확장(Experience) → 향유(Appreciate) 3단계 예술 심화</p>
+      </div>
+      <div class="grid-3" style="margin-bottom: 1rem;">
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--emerald);">1. 계촌클래식축제 (표 9)</h4>
+          <p style="font-size: 0.74rem; color: #cbd5e1; margin-top: 4px;">별빛 오케스트라 공연 참여 및 해설 부스 운영的主体로 활약</p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--sky);">2. 서울 오케스트라 (표 10)</h4>
+          <p style="font-size: 0.74rem; color: #cbd5e1; margin-top: 4px;">5월 16일 서울어린이대공원 대규모 합주 관람 및 견문 확장</p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--amber);">3. LP 인문체험 (표 11)</h4>
+          <p style="font-size: 0.74rem; color: #cbd5e1; margin-top: 4px;">강릉 바이닐 LP 청음 & 고래책방 음악 독서 융합 인문 체험</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="photo-slot" id="slot-art-1">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">계촌클래식축제 공연</span><span class="photo-caption">"별빛 오케스트라 무대 합주"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-art-1')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-art-2">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">서울 청소년 오케스트라</span><span class="photo-caption">"공연 관람 및 공동체 체험"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-art-2')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-art-3">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">LP 청음 & 인문체험</span><span class="photo-caption">"아날로그 LP 감상과 독서"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-art-3')">사진 등록</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 14: Ⅴ. 과제 2 실행 ④ 지역연계·공동체 -->
+    <section class="slide" id="s14" data-title="Ⅴ. 과제 2-4: 지역연계·공동체">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅴ. 연구의 실제 · 과제 2 실행 ④ 지역연계</div>
+        <h2 class="slide-title">지역연계·공동체 3대 프로젝트 (표 12·13·14 & 그림 11·12·13)</h2>
+        <p class="slide-sub">이해(Understand) → 관계(Connect) → 소속(Belong)의 선순환 구조</p>
+      </div>
+      <div class="grid-3" style="margin-bottom: 1rem;">
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--emerald);">1. 평창바로알기 (표 12)</h4>
+          <p style="font-size: 0.74rem; color: #cbd5e1; margin-top: 4px;">유·초·중 이음교육: 서울대 평창목장 스마트축산 & 계란 브랜드 디자인</p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--teal);">2. 심리·정서지원 (표 13)</h4>
+          <p style="font-size: 0.74rem; color: #cbd5e1; margin-top: 4px;">원주 DB 프로농구 직관 응원 및 강원 역사(단종) 영화 관람</p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--amber);">3. 학생자치 학교야영 (표 14)</h4>
+          <p style="font-size: 0.74rem; color: #cbd5e1; margin-top: 4px;">'텐트 밖은 계촌': 식사 조리, 워터배틀, 전학생(104) 초기 정착 포용</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="photo-slot" id="slot-comm-1">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">서울대 평창목장 견학</span><span class="photo-caption">"스마트축산 및 로봇착유기"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-comm-1')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-comm-2">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">원주 농구 & 영화 관람</span><span class="photo-caption">"스포츠·역사 문화 체험"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-comm-2')">사진 등록</button></div>
+        </div>
+        <div class="photo-slot" id="slot-comm-3">
+          <div class="photo-preview-wrap"><div class="photo-empty"><span class="photo-empty-icon">📷</span><span>사진 등록 예정</span></div></div>
+          <div class="photo-footer"><span class="photo-title">학생자치 학교야영</span><span class="photo-caption">"교내 텐트 야영과 불꽃놀이"</span><button class="photo-btn" onclick="uploadSlotPhoto('slot-comm-3')">사진 등록</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 15: Ⅴ. 과제 3 실행 (평가·환류) -->
+    <section class="slide" id="s15" data-title="Ⅴ. 과제 3: 평가·환류 및 현장 확산">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅴ. 연구의 실제 · 연구 과제 3 실행</div>
+        <h2 class="slide-title">학생 성장 중심 평가·환류 및 성과 확산</h2>
+        <p class="slide-sub">일회성 행사를 방지하는 계획-운영-평가-환류 선순환 및 일반화 자료 체계화</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--emerald); margin-bottom: 6px;">1. 질적 다각화 평가</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5;">심층면담과 교사 관찰기록 삼각검증을 통해 학습자신감, 자기효능감, 또래관계, 소속감, 지역애착 지표 포착.</p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--teal); margin-bottom: 6px;">2. 상시 교원 환류</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5;">더배움공동체 정례회를 통해 활동 직후 애로사항을 분석하여 다음 교육과정 시간·내용·안전 즉각 보완.</p>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--cyan); margin-bottom: 6px;">3. 일반화 자료 제작</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.5;">타 농어촌학교에서 즉시 활용할 수 있도록 교육과정 모듈, 정착 매뉴얼, 공개수업 자료를 체계적으로 탑재.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 16: Ⅵ. 활동별 질적분석 (코딩 표) -->
+    <section class="slide" id="s16" data-title="Ⅵ. 주요 활동별 질적분석">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅵ. 연구(운영) 결과 · 활동별 질적분석 (표 15~21)</div>
+        <h2 class="slide-title">활동별 질적분석: 학생들의 생생한 목소리와 변화</h2>
+        <p class="slide-sub">개방코딩 및 범주화로 도출된 학생 101~302의 실제 면담 진술록</p>
+      </div>
+      <div class="grid-2" style="font-size: 0.76rem;">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <strong style="color: var(--emerald);">무인멀티콥터 자격취득 (표 15)</strong>
+            <span class="badge badge-em">302번 학생</span>
+          </div>
+          <p style="color: #f1f5f9; font-style: italic;">"처음엔 자격 취득 과정이 어렵고 복잡했지만, 반복연습 끝에 무조건 도전해 보는 걸로 바뀌었다."</p>
+          <div style="margin-top: 6px; color: #94a3b8; font-size: 0.7rem;">하위범주: 도전과 성취 경험 · 상위범주: 자기효능감 형성</div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <strong style="color: var(--teal);">계촌클래식축제 (표 16)</strong>
+            <span class="badge badge-tl">103번 학생</span>
+          </div>
+          <p style="color: #f1f5f9; font-style: italic;">"부스에서 처음 만난 관람객들과 웃으며 곡을 설명하는 과정이 친구가 생기는 것 같았다."</p>
+          <div style="margin-top: 6px; color: #94a3b8; font-size: 0.7rem;">하위범주: 관람객 소통 · 상위범주: 예술을 통한 공동체 형성</div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <strong style="color: var(--sky);">서울 오케스트라 페스티벌 (표 17)</strong>
+            <span class="badge badge-am">101번 학생</span>
+          </div>
+          <p style="color: #f1f5f9; font-style: italic;">"다른 오케스트라를 보니 우리가 하고 있는 활동이 대단하다 느껴졌고 더 열심히 연습하고 싶어졌다."</p>
+          <div style="margin-top: 6px; color: #94a3b8; font-size: 0.7rem;">하위범주: 실제 공연 감상 · 상위범주: 전문 공연을 통한 음악적 성장</div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <strong style="color: var(--amber);">학생자치 학교야영 (표 21)</strong>
+            <span class="badge badge-ro">104번 (일반전학생)</span>
+          </div>
+          <p style="color: #f1f5f9; font-style: italic;">"전학 온 지 얼마 안 되어 낯설었는데 텐트에서 함께 자며 자연스럽게 가족 같은 친구가 되었다."</p>
+          <div style="margin-top: 6px; color: #94a3b8; font-size: 0.7rem;">하위범주: 전학생 관계 형성 · 상위범주: 함께하는 활동을 통한 관계와 소속감</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 17: Ⅵ. 4대 영역 통합분석 -->
+    <section class="slide" id="s17" data-title="Ⅵ. 4대 영역 통합분석">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅵ. 연구(운영) 결과 · 4대 영역별 통합분석</div>
+        <h2 class="slide-title">4대 영역 통합분석 및 성장 메커니즘</h2>
+        <p class="slide-sub">배움·도전·향유·소속으로 이어지는 학생 성장의 파이프라인</p>
+      </div>
+      <div class="grid-2">
+        <div class="card" style="border-left: 4px solid var(--emerald);">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--emerald);">1. 학습성장 영역</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; margin-top: 4px;">
+            학생 맞춤형 학습지원 → 학습 자신감 형성 → 자기주도적 학습역량 강화 → 농어촌학교 교육력 향상
+          </p>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--teal);">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--teal);">2. 진로·미래역량 영역</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; margin-top: 4px;">
+            미래기술 경험 → 도전과 성취 반복 → 자기효능감 및 문제해결력 형성 → 미래역량 인재로 성장
+          </p>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--cyan);">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--cyan);">3. 문화예술·공동체 영역</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; margin-top: 4px;">
+            예술 실천(Participate) → 문화예술 경험(Experience) → 삶 속 향유(Appreciate) → 문화예술 생태계
+          </p>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--amber);">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--amber);">4. 지역연계·공동체 영역</h4>
+          <p style="font-size: 0.75rem; color: #cbd5e1; margin-top: 4px;">
+            지역 이해(Understand) → 사람 관계(Connect) → 공동체 적응(Belong) → 학교-마을 상생 생태계
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 18: Ⅵ. 계촌형 농어촌유학 모델 -->
+    <section class="slide" id="s18" data-title="Ⅵ. 계촌형 농어촌유학 모델 도출">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅵ. 연구(운영) 결과 · [그림 14] 계촌형 모델 도출</div>
+        <h2 class="slide-title">계촌형 농어촌유학 모델: 배움과 삶의 상생 교육생태계</h2>
+        <p class="slide-sub">배움과 삶이 하나 되어 학생·학교·마을이 함께 성장하는 지속가능한 교육생태계</p>
+      </div>
+      <div class="card" style="background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, rgba(15, 23, 42, 0.95) 100%); border-color: var(--emerald);">
+        <div class="grid-4" style="margin-bottom: 1rem;">
+          <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--emerald); border-radius: 10px; padding: 10px; text-align: center;">
+            <strong style="color: var(--emerald); font-size: 0.85rem;">① 학습성장</strong>
+            <p style="font-size: 0.7rem; color: #cbd5e1; margin-top: 4px;">화상영어 · 학습코칭 · 자기주도 습관</p>
+          </div>
+          <div style="background: rgba(20, 184, 166, 0.15); border: 1px solid var(--teal); border-radius: 10px; padding: 10px; text-align: center;">
+            <strong style="color: var(--teal); font-size: 0.85rem;">② 진로·미래역량</strong>
+            <p style="font-size: 0.7rem; color: #cbd5e1; margin-top: 4px;">무인멀티콥터 드론자격 · 미래농업</p>
+          </div>
+          <div style="background: rgba(6, 182, 212, 0.15); border: 1px solid var(--cyan); border-radius: 10px; padding: 10px; text-align: center;">
+            <strong style="color: var(--cyan); font-size: 0.85rem;">③ 문화예술·공동체</strong>
+            <p style="font-size: 0.7rem; color: #cbd5e1; margin-top: 4px;">클래식축제 · 오케스트라 · LP 인문</p>
+          </div>
+          <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid var(--amber); border-radius: 10px; padding: 10px; text-align: center;">
+            <strong style="color: var(--amber); font-size: 0.85rem;">④ 지역연계·공동체</strong>
+            <p style="font-size: 0.7rem; color: #cbd5e1; margin-top: 4px;">평창목장 · 심리정서 · 학교야영</p>
+          </div>
+        </div>
+
+        <div style="text-align: center; padding: 10px; background: rgba(2, 6, 23, 0.8); border-radius: 8px; font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 1rem;">
+          중앙 코어: <span style="color: var(--emerald);">계촌형 농어촌유학 모델 (학생 중심 맞춤형 교육과정)</span>
+        </div>
+
+        <div class="grid-5" style="font-size: 0.72rem; text-align: center;">
+          <div style="background: #0f172a; padding: 8px; border-radius: 8px; border: 1px solid #334155;"><strong>학교</strong><br /><span style="color:#94a3b8;">교육력 극대화</span></div>
+          <div style="background: #0f172a; padding: 8px; border-radius: 8px; border: 1px solid #334155;"><strong>학생</strong><br /><span style="color:#94a3b8;">전인적 미래역량</span></div>
+          <div style="background: #0f172a; padding: 8px; border-radius: 8px; border: 1px solid #334155;"><strong>마을(지역)</strong><br /><span style="color:#94a3b8;">지역가치 재발견</span></div>
+          <div style="background: #0f172a; padding: 8px; border-radius: 8px; border: 1px solid #334155;"><strong>협력체계</strong><br /><span style="color:#94a3b8;">민관학 거버넌스</span></div>
+          <div style="background: #0f172a; padding: 8px; border-radius: 8px; border: 1px solid #334155;"><strong>지속가능성</strong><br /><span style="color:#94a3b8;">선순환 상생</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 19: Ⅶ. 결론 및 정책 제언 -->
+    <section class="slide" id="s19" data-title="Ⅶ. 결론 및 5대 정책 제언">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅶ. 결론 및 제언 · 결론 & 5대 정책 제언</div>
+        <h2 class="slide-title">연구 결론 및 지속가능성을 위한 5대 정책 제언</h2>
+        <p class="slide-sub">"작은 학교의 한계 보완이 아닌, 작은 학교의 장점을 교육력으로 전환하는 모델"</p>
+      </div>
+      <div class="card" style="margin-bottom: 1rem; border-color: rgba(16, 185, 129, 0.4);">
+        <p style="font-size: 0.85rem; font-weight: 700; color: #fff; line-height: 1.6;">
+          계촌중학교 농어촌유학 모델은 <span style="color: var(--emerald);">'작은 학교의 한계를 메우는 소극적 대책'</span>이 아니라, 밀착 지도와 마을 자원을 결합해 <span style="color: var(--teal);">'작은 학교의 장점을 최대의 교육력으로 전환시킨 능동적 미래 공교육 모델'</span>입니다.
+        </p>
+      </div>
+      <div class="grid-5" style="font-size: 0.72rem;">
+        <div class="card"><strong>제언 01</strong><br /><span style="color: var(--emerald); font-weight: 600;">교육과정 중심 전환</span><br /><span style="color:#94a3b8;">학생 유치 위주 지원 탈피</span></div>
+        <div class="card"><strong>제언 02</strong><br /><span style="color: var(--teal); font-weight: 600;">거버넌스 제도화</span><br /><span style="color:#94a3b8;">지자체·교육청 정례 예산</span></div>
+        <div class="card"><strong>제언 03</strong><br /><span style="color: var(--cyan); font-weight: 600;">장소기반교육(PBE)</span><br /><span style="color:#94a3b8;">문화예술·산업 특화 집중</span></div>
+        <div class="card"><strong>제언 04</strong><br /><span style="color: var(--amber); font-weight: 600;">포용적 통합교육</span><br /><span style="color:#94a3b8;">유학생과 재학생 함께 성장</span></div>
+        <div class="card"><strong>제언 05</strong><br /><span style="color: var(--rose); font-weight: 600;">질적 평가체계</span><br /><span style="color:#94a3b8;">단기 숫자 대신 정착·성장 측정</span></div>
+      </div>
+    </section>
+
+    <!-- 슬라이드 20: Ⅷ. 성과 및 계획 / Q&A -->
+    <section class="slide" id="s20" data-title="Ⅷ. 성과 및 향후 계획 / Q&A">
+      <div class="slide-header">
+        <div class="slide-kicker">Ⅷ. 성과 및 향후 계획 · 1차년도 성과 & 2차년도 계획</div>
+        <h2 class="slide-title">1차년도 성과 총괄 및 2차년도 심화 계획</h2>
+        <p class="slide-sub">모형의 질적 고도화 및 강원도형 중학교 농어촌유학 매뉴얼 확산</p>
+      </div>
+      <div class="grid-2" style="margin-bottom: 1.25rem;">
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--emerald);">1차년도 핵심 성과 (2026)</h4>
+          <ul style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6; margin-top: 4px;">
+            <li>• 4대 특화 교육과정 성공적 정착 및 전 교원 학습코칭 연수 이수</li>
+            <li>• 학생 심층면담 및 관찰기록 삼각검증을 통한 질적 성장 입증</li>
+            <li>• 교육 매력도 입증: 농어촌유학 외 자발적 일반전학생 유입 발생</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--teal);">2차년도 심화 계획 (2027)</h4>
+          <ul style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6; margin-top: 4px;">
+            <li>• 학생 개별 성장지원 포트폴리오 시스템 정교화</li>
+            <li>• 타 농어촌학교 보급용 일반화 매뉴얼 및 수업 자료집 발간</li>
+            <li>• 학부모·지역사회 거버넌스 환류 확대 및 종단 연구 추진</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="text-align: center; padding: 1.75rem; border-color: rgba(16, 185, 129, 0.4); background: rgba(15, 23, 42, 0.9);">
+        <h3 style="font-size: 1.25rem; font-family: var(--font-serif); font-weight: 800; color: #fff; margin-bottom: 6px;">
+          "경청해 주셔서 대단히 감사합니다."
+        </h3>
+        <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 1rem;">
+          질의 및 응답 (Q & A) 시간을 갖도록 하겠습니다.
+        </p>
+        <p style="font-size: 0.75rem; color: #cbd5e1;">
+          강원특별자치도교육청 지정 연구학교 (평창) 계촌중학교<br />
+          TEL: 033-333-0511 · FAX: 033-333-4605
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="bottom-bar">
+    <div id="prog-bar"></div>
+    <div class="slide-counter">
+      <span id="cnt" style="color: var(--emerald);">01 / 20</span>
+      <span id="slide-title-bar" style="color: #94a3b8; font-size: 0.75rem; font-family: var(--font-sans); font-weight: 500; margin-left: 8px;">운영보고서 표지</span>
     </div>
-    <script>
-      const AUTH_FLOW_TEST_COOKIE_NAME = '__SECURE-aistudio_auth_flow_may_set_cookies';
-      const COOKIE_VALUE = 'true';
 
-      function getCookie(name) {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-          let cookie = cookies[i].trim();
-          if (cookie.startsWith(name + '=')) {
-            return cookie.substring(name.length + 1);
-          }
-        }
-        return null;
-      }
+    <div class="btn-group">
+      <button class="ctrl-btn" id="bP" onclick="prev()">← 이전</button>
+      <button class="ctrl-btn primary" id="bN" onclick="next()">다음 →</button>
+    </div>
+  </footer>
+</div>
 
-      function setAuthFlowTestCookie() {
-        // Set the cookie's TTL to 1 minute. This is a short lived cookie because it is only used
-        // when the user does not have an auth token or their auth token needs to be reset.
-        // Making this cookie too long-lived allows the user to get into a state where they can't
-        // mint a new auth token.
-        document.cookie = `${AUTH_FLOW_TEST_COOKIE_NAME}=${COOKIE_VALUE}; Path=/; Secure; SameSite=None; Domain=${window.location.hostname}; Partitioned; Max-Age=60;`;
-      }
+<!-- 발표 대본 모달 -->
+<div class="overlay" id="notes-overlay">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff;">🎙️ 발표자 구어체 대본 및 해설</h3>
+      <button class="modal-close" onclick="closeOverlays()">✕</button>
+    </div>
+    <div class="modal-body" id="notes-content" style="font-size: 0.85rem; line-height: 1.7; color: #cbd5e1; white-space: pre-line;"></div>
+  </div>
+</div>
 
-      /**
-       * Returns true if the test cookie is set, false otherwise.
-       */
-      function authFlowTestCookieIsSet() {
-        return getCookie(AUTH_FLOW_TEST_COOKIE_NAME) === COOKIE_VALUE;
-      }
+<!-- 전체 슬라이드 모달 -->
+<div class="overlay" id="grid-overlay">
+  <div class="modal-box" style="max-width: 960px;">
+    <div class="modal-head">
+      <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff;">📑 전체 슬라이드 바로가기 (20장)</h3>
+      <button class="modal-close" onclick="closeOverlays()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="grid-4" id="grid-list"></div>
+    </div>
+  </div>
+</div>
 
-      /**
-       * Redirects to the return url. If autoClose is true, then the return url will be opened in a
-       * new window, and it will be closed automatically when the page loads.
-       * Options:
-       *   storageAccessGranted: if true, appends __storage_access_granted=1 to
-       *   the return url so the Lua auth script can set the test cookie
-       *   server-side (needed for Safari/iOS where document.cookie is blocked).
-       */
-      async function redirectToReturnUrl(autoClose, storageAccessGranted = false) {
-        const initialReturnUrlStr = new URLSearchParams(window.location.search).get('return_url');
-        const returnUrl = initialReturnUrlStr ? new URL(initialReturnUrlStr) : null;
+<input type="file" id="global-photo-input" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)" />
 
-        // Prevent potentially malicious URLs from being used
-        if (returnUrl.protocol.toLowerCase() === 'javascript:') {
-          console.error('Potentially malicious return URL blocked');
-          return;
-        }
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let cur = 0;
+  let activeUploadSlot = null;
 
-        if (storageAccessGranted) {
-          returnUrl.searchParams.set('__storage_access_granted', '1');
-        }
+  const NOTES = {
+    s1: "안녕하십니까. 강원특별자치도교육청 지정 연구학교 평창 계촌중학교 연구보고 발표를 시작하겠습니다. 본 연구는 학령인구 감소와 소규모 학교의 위기 속에서, 단순한 학생 유치를 넘어 학교와 마을이 함께 상생하는 지속가능한 농어촌 교육생태계를 구축하고자 1년간 추진한 연구 결과입니다.",
+    s2: "오늘 발표는 연구의 개요와 이론적 배경, 연구 과제 설정, 연구의 설계와 실제 실행 과정, 그리고 학생 심층면담 중심의 질적분석 결과와 계촌형 농어촌유학 모델 도출, 결론 및 제언 순으로 말씀드리겠습니다.",
+    s3: "농어촌 지역의 학생 수 감소는 학교의 존립뿐 아니라 지역 공동체의 존속을 위협하고 있습니다. 기존의 일회성 농촌체험만으로는 유학 가정이 지속 정착하기 어렵습니다. 특히 중학교 단계는 진로 탐색, 정서적 독립, 교과학습의 연속성이 함께 요구되므로 초등학교와는 차별화된 통합적 교육 모델이 필수적입니다.",
+    s4: "본 연구는 계촌중학교 전교생 11명과 교원, 학부모를 대상으로 진행되었습니다. 주목할 점은 농어촌유학생뿐 아니라 본교 교육활동의 우수성을 보고 일반전학을 온 학생까지 포함하여 모든 구성원의 성장을 분석했다는 점입니다.",
+    s5: "본 연구의 이론적 기저는 네 가지입니다. 지역과 지속적 유대를 맺는 관계인구 이론, 다층적 교육생태계 이론, 위기를 교육적 기회로 전환하는 사회생태적 회복력 이론, 그리고 지역을 배움의 자원으로 승화하는 장소기반교육(PBE)입니다.",
+    s6: "실태 분석 결과 본교는 계촌클래식축제, 오케스트라, 드론 전문교육 등 독보적인 강점을 보유하고 있으나 소규모 교원 부담과 주거 인프라의 한계가 있었습니다. 이를 바탕으로 강점을 살려 기회를 잡는 SO전략, 정착 지원 인프라를 강화하는 WO전략 등 4대 전략을 도출하였습니다.",
+    s7: "이론적 배경과 실태 분석을 종합하여 3가지 연구 과제를 설정하였습니다. 연구 과제 1은 프로그램 운영 기반 조성, 연구 과제 2는 4대 핵심 특화 프로그램 개발 및 운영, 연구 과제 3은 학생 성장 중심 평가와 현장 확산입니다.",
+    s8: "연구 추진 절차는 지역협의체 구축부터 일반화 자료 보존까지 연간 단계별로 체계적으로 진행되었습니다. 학교 내에서는 교장선생님을 위원장으로 5개 분과와 행정실 업무지원 공동체가 유기적으로 협력하였습니다.",
+    s9: "전교생 11명의 학교에서 단순 만족도 수치 통계는 한두 명의 반응에 왜곡될 수 있습니다. 이에 학생 사후 심층면담 10문항, 교사 학생관찰기록지, 활동 결과물을 결합한 자료 삼각검증을 실시하였으며, 8단계 질적분석 절차를 엄격히 적용하였습니다.",
+    s10: "연구 과제 1에서는 교원의 전문성을 높이기 위해 전 교원 7명이 학습코칭 기본과정과 심화과정을 이수하였습니다. 또한 교원들이 자발적으로 참여하는 더배움공동체를 정례화하여 학생 관찰 사례와 수업 나눔을 지속적으로 협의하였습니다.",
+    s11: "연구 과제 2의 첫 번째 축인 학습성장 영역입니다. 매주 수요일 7교시 개인별 원어민 화상영어 회화 후, 8교시에 본교 영어교사가 즉각적인 1:1 보충 피드백을 제공하고 주1회 가정 연계학습으로 순환 체계를 구축했습니다.",
+    s12: "두 번째는 진로·미래역량 프로그램입니다. 만 14세 이상 3학년 진학 예정 학생을 대상으로 지역 드론 전문교육원과 협력하여 항공역학 이론, 시뮬레이터 비행, 실기 비행 훈련을 거쳐 국가공인 무인멀티콥터 1종 조종자 자격증을 전원 취득하였습니다.",
+    s13: "세 번째는 문화예술·공동체 프로그램입니다. 지역의 상징인 계촌클래식축제에서 별빛 오케스트라 공연과 축제 부스 운영 주체로 참여하였으며, 서울 청소년 오케스트라 페스티벌 관람 및 강릉 바이닐 LP 청음으로 클래식 인문학적 소양을 체득했습니다.",
+    s14: "네 번째는 지역연계 프로그램입니다. 유·초·중 이음교육으로 서울대 평창목장 스마트축산 견학, 원주 DB 프로농구 직관과 강원 역사 영화 관람, 학생자치회 주도 1박2일 학교야영을 실시하여 전학생과 기존 학생이 하나 되는 포용 문화를 만들었습니다.",
+    s15: "연구 과제 3에서는 일회성 행사로 끝나지 않도록 반구조화 면담과 교사 관찰지를 기반으로 더배움공동체에서 상시 환류하였습니다. 또한 타 농어촌학교에서 즉시 활용할 수 있도록 교육과정 모듈과 운영 매뉴얼 등 일반화 자료를 체계적으로 제작·탑재하였습니다.",
+    s16: "질적분석 결과입니다. 무인멀티콥터는 '무조건 도전해 보는 걸로 바뀌었다'며 자기효능감을 입증했고, 계촌클래식축제는 관람객 해설과 합주를 통해 '친구가 생기는 느낌'과 문화예술 직업에 눈을 떴습니다. 전학생 104번도 학교야영을 통해 가족 같은 친구가 되었다고 응답했습니다.",
+    s17: "4대 영역을 통합 분석한 결과, 학습성장은 '맞춤형 학습지원 -> 자기주도성', 진로미래는 '도전과 성취 반복 -> 진로 탐색', 문화예술은 '참여 -> 경험 -> 향유', 지역연계는 '이해 -> 관계 -> 소속'으로 선순환하며 학생을 지역사회의 주체로 성장시켰습니다.",
+    s18: "본 연구의 핵심 결실인 계촌형 농어촌유학 모델입니다. 중앙의 학생 중심 교육과정을 4대 궤도가 둘러싸고, 하단에는 학교-학생-마을-협력체계-지속가능성의 5대 주체가 상생 구조를 형성하고 있습니다.",
+    s19: "본 연구의 결론은 분명합니다. 계촌중학교 모델은 작은 학교의 한계를 메우는 소극적 대책이 아니라, 작은 학교만의 밀착형 지도와 지역 자원을 최대 교육력으로 전환하는 적극적 혁신 모델입니다. 이를 위해 5대 정책적 제언을 제시합니다.",
+    s20: "2차년도에는 1차년도 성과를 바탕으로 교육과정 고도화와 현장 일반화 매뉴얼을 개발하여 강원도 전역의 농어촌학교로 확산하고자 합니다. 이상으로 보고를 마치며, 질의를 경청하겠습니다. 감사합니다."
+  };
 
-        if (autoClose) {
-          returnUrl.searchParams.set('__auto_close', '1');
-          const url = new URL(window.location.href);
-          url.searchParams.set('return_url', returnUrl.toString());
-          // Land on the cookie check page first, so the user can interact with it before proceeding
-          // to the return url where cookies can be set.
-          window.open(url.toString(), '_blank');
-          const hasAccess = await document.hasStorageAccess();
-          document.querySelector('#stepOne').classList.add('hidden');
-          if (!hasAccess) {
-            document.querySelector('#stepThree').classList.remove('hidden');
-          } else {
-            window.location.reload();
-          }
-        } else {
-          window.location.href = returnUrl.toString();
-        }
-      }
+  function applySlide(index) {
+    cur = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((s, i) => { s.classList.toggle('active', i === cur); });
 
-      /**
-       * Grants the browser permission to set cookies. If successful, then it redirects to the
-       * return url.
-       */
-      async function grantStorageAccess() {
+    document.getElementById('cnt').textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+    document.getElementById('slide-title-bar').textContent = slides[cur].dataset.title || '';
+    document.getElementById('prog-bar').style.width = ((cur + 1) / slides.length * 100) + '%';
+    document.getElementById('bP').disabled = (cur === 0);
+    document.getElementById('bN').disabled = (cur === slides.length - 1);
+
+    history.replaceState(null, '', '#' + (cur + 1));
+  }
+
+  function go(index) { applySlide(index); }
+  function next() { if (cur < slides.length - 1) go(cur + 1); }
+  function prev() { if (cur > 0) go(cur - 1); }
+
+  function openNotes() {
+    const sId = slides[cur].id;
+    document.getElementById('notes-content').textContent = NOTES[sId] || '작성된 발표 해설이 없습니다.';
+    document.getElementById('notes-overlay').classList.add('show');
+  }
+
+  function openGrid() {
+    const list = document.getElementById('grid-list');
+    list.innerHTML = '';
+    slides.forEach((s, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.cursor = 'pointer';
+      if (idx === cur) card.style.borderColor = 'var(--emerald)';
+      card.innerHTML = `<span class="badge badge-em">#${idx + 1}</span><h5 style="margin-top:4px; font-weight:700; color:#fff;">${s.dataset.title}</h5>`;
+      card.onclick = () => { closeOverlays(); go(idx); };
+      list.appendChild(card);
+    });
+    document.getElementById('grid-overlay').classList.add('show');
+  }
+
+  function closeOverlays() {
+    document.querySelectorAll('.overlay').forEach(o => o.classList.remove('show'));
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  function toggleHandout() {
+    document.body.classList.toggle('handout-mode');
+    if (document.body.classList.contains('handout-mode')) {
+      alert('유인물 / 연속 인쇄 모드로 전환되었습니다. Ctrl+P를 누르시면 보고서 형태로 즉시 인쇄 또는 PDF 저장이 가능합니다. Esc 키를 누르면 원래 슬라이드로 돌아옵니다.');
+    }
+  }
+
+  window.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key.toLowerCase() === 'f') { e.preventDefault(); toggleFullscreen(); }
+    else if (e.key.toLowerCase() === 'n' || e.key.toLowerCase() === 't') { e.preventDefault(); openNotes(); }
+    else if (e.key.toLowerCase() === 'g' || e.key.toLowerCase() === 'o') { e.preventDefault(); openGrid(); }
+    else if (e.key.toLowerCase() === 'p') { e.preventDefault(); toggleHandout(); }
+    else if (e.key === 'Escape') {
+      closeOverlays();
+      if (document.body.classList.contains('handout-mode')) document.body.classList.remove('handout-mode');
+    }
+  });
+
+  function uploadSlotPhoto(slotId) {
+    activeUploadSlot = slotId;
+    document.getElementById('global-photo-input').click();
+  }
+
+  function handlePhotoUpload(e) {
+    const file = e.target.files && e.target.files[0];
+    if (file && activeUploadSlot) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const dataUrl = evt.target.result;
+        renderPhoto(activeUploadSlot, dataUrl);
         try {
-          await document.requestStorageAccess();
-          // Recent Safari/iOS versions block document.cookie entirely in
-          // cross-site iframes, even after requestStorageAccess(). Only
-          // server-side Set-Cookie headers work. Signal to the Lua auth script
-          // via query param so it can set the test cookie server-side.
-          redirectToReturnUrl(false, /* storageAccessGranted= */ true);
+          localStorage.setItem('photo_' + activeUploadSlot, dataUrl);
         } catch (err) {
-          console.log('error after button click: ', err);
+          console.warn('LocalStorage save failed:', err);
         }
-      }
+      };
+      reader.readAsDataURL(file);
+    }
+    e.target.value = '';
+  }
 
-      /**
-       * Verifies that the browser can set cookies. If it can, then it redirects to the return url.
-       * If it can't, then it shows the error UI.
-       */
-      function verifyCanSetCookies() {
-        setAuthFlowTestCookie();
-        if (authFlowTestCookieIsSet()) {
-          // Check if we are on the auto-close flow, and if so show the interact button.
-          const returnUrl = new URLSearchParams(window.location.search).get('return_url');
-          const autoClose = new URL(returnUrl).searchParams.has('__auto_close');
-          if (autoClose) {
-            document.querySelector('#stepOne').classList.add('hidden');
-            document.querySelector('#stepTwo').classList.remove('hidden');
-          } else {
-            redirectToReturnUrl(false);
-            return;
-          }
-        }
-        // The cookie could not be set, so initiate the recovery flow.
-        document.querySelector('.logo').classList.add('hidden');
-        document.querySelector('.spinner').classList.add('hidden');
-        document.querySelector('#error-ui').classList.remove('hidden');
-      }
+  function renderPhoto(slotId, dataUrl) {
+    const slotEl = document.getElementById(slotId);
+    if (!slotEl) return;
+    const previewWrap = slotEl.querySelector('.photo-preview-wrap');
+    if (previewWrap) {
+      previewWrap.innerHTML = `<img src="${dataUrl}" class="photo-img" alt="현장 사진" />`;
+    }
+    const btn = slotEl.querySelector('.photo-btn');
+    if (btn) btn.textContent = '사진 변경';
+  }
 
-      // Start the cookie verification process.
-      verifyCanSetCookies();
-    </script>
-  </body>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.photo-slot').forEach(slot => {
+      const saved = localStorage.getItem('photo_' + slot.id);
+      if (saved) {
+        renderPhoto(slot.id, saved);
+      }
+    });
+
+    const m = location.hash.match(/^#(\d+)/);
+    if (m) go(+m[1] - 1); else go(0);
+  });
+</script>
+</body>
 </html>
